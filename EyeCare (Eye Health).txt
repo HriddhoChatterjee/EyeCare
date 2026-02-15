@@ -1,0 +1,29 @@
+EyeCare (Eye Health)
+
+Aim: To build a website check eye health and provide all details
+
+
+
+Prompt
+------
+Build a website that can do eye checkup by online method, it will help the patient to check whether his/her eye is in good state or not.
+
+In the header section, to the extreme left just like the Netflix logo, write EyeCare in the same manner, then comes some options:
+
+1st - EyeCheck: It will check your eye condition through some tests, according to the user's responses towards the test, it will provide a result and then it will give the precautions to follow, and last the statement , Prescribe to your nearby doctor.
+
+2nd - EyeHelp: It will tell you what you should do according to your profession, profession options are student, works in IT sector, doctor, and add some more type if i miss any in which eye health is important, and then give the precautions and some safety to follow.
+
+The above options will on the right side of the header.
+
+When the options are selected new tab will be opened and not in that same tab.
+
+Now the home page:
+In the main home page there are the healthy eye tips, 
+Like avg scree time should be, 
+From what distance the user should use the device with image examples,
+Then the healthy diets for eyes, 
+Some eye exercises, with steps and benefits
+
+Style:
+Make the full webpage based on green and yellow theme to make it comfortable for the eye. Add little neon vibes to make it look aesthetic and cool.

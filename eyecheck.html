@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EyeCheck | Vision Diagnostic</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific styles for the Eye Test */
+        .test-container {
+            text-align: center;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 2px solid var(--neon-green);
+        }
+        #visual-target {
+            font-weight: bold;
+            color: white;
+            margin: 40px 0;
+            transition: all 0.3s ease;
+            letter-spacing: 10px;
+            user-select: none;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 10px 25px;
+            background: transparent;
+            border: 2px solid var(--neon-green);
+            color: var(--neon-green);
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        button:hover {
+            background: var(--neon-green);
+            color: var(--bg-color);
+        }
+        .results-box {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            border-top: 1px dashed var(--soft-yellow);
+        }
+        .precaution-list {
+            text-align: left;
+            color: var(--soft-yellow);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">EyeCare</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="eyehelp.html">EyeHelp</a>
+        </nav>
+    </header>
+
+    <div class="test-container">
+        <h2>Digital Acuity Test</h2>
+        <p>Sit exactly 2 feet away from the screen. Can you read the letters below?</p>
+        
+        <div id="visual-target" style="font-size: 80px;">E F P</div>
+
+        <div class="btn-group" id="action-buttons">
+            <button onclick="nextStep(1)">I can see clearly</button>
+            <button onclick="nextStep(0)">It's blurry / I can't see</button>
+        </div>
+
+        <div id="results" class="results-box">
+            <h2 id="score-text"></h2>
+            <div class="precaution-list">
+                <h3>Recommended Precautions:</h3>
+                <ul id="precautions"></ul>
+            </div>
+            <p style="font-weight: bold; color: #ff4444; margin-top: 20px;">
+                * Prescribe to your nearby doctor for a professional exam.
+            </p>
+            <button onclick="location.reload()">Restart Test</button>
+        </div>
+    </div>
+
+    <script>
+        let currentLevel = 0;
+        const levels = [
+            { size: "80px", text: "E F P", label: "Level 1" },
+            { size: "50px", text: "T O Z", label: "Level 2" },
+            { size: "30px", text: "L P E D", label: "Level 3" },
+            { size: "18px", text: "P E C F D", label: "Level 4" },
+            { size: "10px", text: "E D F C Z P", label: "Level 5" }
+        ];
+
+        function nextStep(success) {
+            if (success && currentLevel < levels.length - 1) {
+                currentLevel++;
+                const target = document.getElementById('visual-target');
+                target.style.fontSize = levels[currentLevel].size;
+                target.innerText = levels[currentLevel].text;
+            } else {
+                showResults(success);
+            }
+        }
+
+        function showResults(lastSuccess) {
+            document.getElementById('action-buttons').style.display = 'none';
+            document.getElementById('visual-target').style.display = 'none';
+            const resultsDiv = document.getElementById('results');
+            const scoreText = document.getElementById('score-text');
+            const precList = document.getElementById('precautions');
+            
+            resultsDiv.style.display = 'block';
+            
+            let finalScore = lastSuccess ? currentLevel + 1 : currentLevel;
+
+            // Logic for Results & Precautions
+            if (finalScore >= 4) {
+                scoreText.innerText = "Result: Good Vision (Level " + finalScore + "/5)";
+                precList.innerHTML = `
+                    <li>Maintain your current screen-time habits.</li>
+                    <li>Keep using the 20-20-20 rule to prevent future strain.</li>
+                    <li>Ensure your room has adequate ambient lighting.</li>`;
+            } else {
+                scoreText.innerText = "Result: Potential Eye Strain Detected (Level " + finalScore + "/5)";
+                precList.innerHTML = `
+                    <li>Reduce screen brightness immediately.</li>
+                    <li>Consider using Blue Light blocking glasses.</li>
+                    <li>Increase the font size on your devices.</li>
+                    <li>Schedule an appointment with an optometrist.</li>`;
+            }
+        }
+    </script>
+</body>
+</html>
